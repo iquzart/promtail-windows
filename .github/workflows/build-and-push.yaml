@@ -19,7 +19,12 @@ jobs:
 
       - name: Read version from file
         id: read-version
-        run: echo "::set-output name=version::$(cat Container/version)"
+        run: |
+          echo "VERSION=$(cat Container/version)" >> $GITHUB_ENV
+
+      - name: Print Promtail version
+        run: |
+          echo "Promtail version: $VERSION"
 
       - name: Build Docker image
         run: |
