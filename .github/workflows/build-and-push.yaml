@@ -1,0 +1,37 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  DOCKER_HUB_USERNAME: diquzart
+  DOCKER_HUB_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}
+
+jobs:
+  build-and-push:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Read version from file
+        id: read-version
+        run: echo "::set-output name=version::$(cat Container/version)"
+
+      - name: Build Docker image
+        run: |
+          docker build \
+            --build-arg PROMTAIL_VERSION=${{ steps.read-version.outputs.version }} \
+            --tag ${{ env.DOCKER_HUB_USERNAME }}/promtail-win:${{ steps.read-version.outputs.version }} \
+            -f Container/Containerfile .
+
+      - name: Log in to Docker Hub
+        run: |
+          echo $DOCKER_HUB_PASSWORD | docker login -u $DOCKER_HUB_USERNAME --password-stdin
+
+      - name: Push Docker image to Docker Hub
+        run: |
+          docker push ${{ env.DOCKER_HUB_USERNAME }}/promtail-win:${{ steps.read-version.outputs.version }}
