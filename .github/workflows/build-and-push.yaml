@@ -20,7 +20,7 @@ jobs:
       - name: Read version from file
         id: read-version
         run: |
-          echo "VERSION=$(cat Container/version)" >> $GITHUB_ENV
+          echo "::set-env name=VERSION::$(cat Container/version)"
 
       - name: Print Promtail version
         run: |
