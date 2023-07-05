@@ -25,11 +25,11 @@ LABEL \
 WORKDIR /promtail
 
 # Copy the Promtail binary from the builder stage
-COPY --from=builder /promtail/promtail-windows-amd64 .
+COPY --from=builder /promtail/promtail-windows-amd64.exe .
 
 # Expose the necessary ports
 EXPOSE 3101
 
 # Set the command to run Promtail
-ENTRYPOINT ["promtail-windows-amd64"]
+ENTRYPOINT ["promtail-windows-amd64.exe"]
 
