@@ -1,5 +1,5 @@
 # Stage 1: Build stage
-FROM mcr.microsoft.com/windows/servercore:ltsc2019-amd64 AS builder
+FROM mcr.microsoft.com/windows/servercore:ltsc2022 AS builder
 
 # Set the working directory
 WORKDIR /promtail
