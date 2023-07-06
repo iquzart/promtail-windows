@@ -22,8 +22,8 @@ jobs:
         id: read-version
         run: |
           $ver = Get-Content -Path Container/version
-          echo $ver
           echo "VERSION=$ver" >> $GITHUB_ENV
+          echo ${{ env.VERSION }}
           # Write-Host "Promtail version: $VERSION"
 
       - name: Print Promtail version
