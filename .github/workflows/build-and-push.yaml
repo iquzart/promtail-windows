@@ -22,12 +22,13 @@ jobs:
         id: read-version
         run: |
           $ver = Get-Content -Path Container/version
+          echo $ver
           echo "VERSION=$ver" >> $GITHUB_ENV
           # Write-Host "Promtail version: $VERSION"
 
       - name: Print Promtail version
         run: |
-          Write-Host "Promtail version: ${{ env.VERSION }}"
+          echo "Promtail version: ${{ env.VERSION }}"
 
       # - name: Build Docker image
       #   run: |
