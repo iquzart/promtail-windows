@@ -18,15 +18,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Read version from file
-        id: read-version
+      - name: Read version
         run: |
           $version = Get-Content -Path Container/version
-          echo "::set-output name=version::$version"
-
-      - name: Print Promtail version
-        run: |
-          $version = $env:VERSION
+          echo "version=$version" >> $GITHUB_ENV
           Write-Host "Promtail version: $version"
 
       - name: Build Docker image
