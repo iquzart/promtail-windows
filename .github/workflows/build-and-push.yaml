@@ -27,8 +27,8 @@ jobs:
       - name: Build Docker image
         run: |
           docker build `
-            --build-arg=PROMTAIL_VERSION=${{ env.version }} `
-            --tag=${{ env.DOCKER_HUB_USERNAME }}/promtail-win:${{ env.version }} `
+            --build-arg=PROMTAIL_VERSION=${{ steps.read-version.outputs.version }} `
+            --tag=${{ env.DOCKER_HUB_USERNAME }}/promtail-win:${{ steps.read-version.outputs.version }} `
             -f Container/Containerfile .
 
       - name: Log in to Docker Hub
