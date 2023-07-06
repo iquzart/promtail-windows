@@ -26,8 +26,9 @@ WORKDIR /promtail
 
 # Copy the Promtail binary from the builder stage
 COPY --from=builder /promtail/promtail-windows-amd64.exe .
-# Copy netapi32.dll from builder stage
-COPY --from=core /Windows/System32/netapi32.dll /Windows/System32/netapi32.dll
+
+# Copy netapi32.dll from the builder image
+COPY --from=builder /Windows/System32/netapi32.dll /Windows/System32/netapi32.dll
 
 # Expose the necessary ports
 EXPOSE 3101
