@@ -26,7 +26,7 @@ jobs:
  
       - name: Print Promtail version
         run: |
-          echo "The version is:  $env:VERSION"
+          echo "The version is: $env:VERSION"
 
       - name: Build Docker image
         run: |
