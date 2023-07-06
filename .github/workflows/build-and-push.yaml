@@ -21,7 +21,7 @@ jobs:
       - name: Read version from file
         id: read-version
         run: |
-          echo "::set-env name=VERSION::$(cat Container/version)"
+          echo "::set-output name=version::$(cat Container/version)"
 
       - name: Print Promtail version
         run: |
