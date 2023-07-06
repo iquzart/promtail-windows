@@ -19,10 +19,11 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Read version
+        id: read-version
         run: |
-          $version = Get-Content -Path Container/version
-          echo "version=$version" >> $GITHUB_ENV
-          Write-Host "Promtail version: $version"
+          $ver = Get-Content -Path Container/version
+          echo "VERSION=$ver" >> $GITHUB_ENV
+          Write-Host "Promtail version: $VERSION"
 
       - name: Build Docker image
         run: |
