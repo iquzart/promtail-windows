@@ -21,11 +21,13 @@ jobs:
       - name: Read version from file
         id: read-version
         run: |
-          echo "::set-output name=version::$(cat Container/version)"
+          $version = Get-Content -Path Container/version
+          echo "::set-output name=version::$version"
 
       - name: Print Promtail version
         run: |
-          echo "Promtail version: $VERSION"
+          $version = $env:VERSION
+          Write-Host "Promtail version: $version"
 
       - name: Build Docker image
         uses: docker/build-push-action@v2
