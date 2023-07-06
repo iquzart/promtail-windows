@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - development
 
 env:
   DOCKER_HUB_USERNAME: diquzart
@@ -27,16 +28,22 @@ jobs:
           echo "Promtail version: $VERSION"
 
       - name: Build Docker image
-        run: |
-          docker build `
-            --build-arg=PROMTAIL_VERSION=${{ steps.read-version.outputs.version }} `
-            --tag=${{ env.DOCKER_HUB_USERNAME }}/promtail-win:${{ steps.read-version.outputs.version }} `
-            -f Container/Containerfile .
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: Container/Containerfile
+          build-args: PROMTAIL_VERSION=${{ steps.read-version.outputs.version }}
+          tags: ${{ env.DOCKER_HUB_USERNAME }}/promtail-win:${{ steps.read-version.outputs.version }}
 
       - name: Log in to Docker Hub
-        run: |
-          echo $DOCKER_HUB_PASSWORD | docker login -u $DOCKER_HUB_USERNAME --password-stdin
+        uses: docker/login-action@v1
+        with:
+          username: ${{ env.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
 
       - name: Push Docker image to Docker Hub
-        run: |
-          docker push ${{ env.DOCKER_HUB_USERNAME }}/promtail-win:${{ steps.read-version.outputs.version }}
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: Container/Containerfile
+          push: ${{ env.DOCKER_HUB_USERNAME }}/promtail-win:${{ steps.read-version.outputs.version }}
