@@ -23,20 +23,24 @@ jobs:
         run: |
           $ver = Get-Content -Path Container/version
           echo "VERSION=$ver" >> $GITHUB_ENV
-          Write-Host "Promtail version: $VERSION"
+          # Write-Host "Promtail version: $VERSION"
 
-      - name: Build Docker image
+      - name: Print Promtail version
         run: |
-          docker build `
-            --build-arg=PROMTAIL_VERSION=${{ steps.read-version.outputs.version }} `
-            --tag=${{ env.DOCKER_HUB_USERNAME }}/promtail-win:${{ steps.read-version.outputs.version }} `
-            -f Container/Containerfile .
+          Write-Host "Promtail version: ${{ env.VERSION }}"
 
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ env.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+      # - name: Build Docker image
+      #   run: |
+      #     docker build `
+      #       --build-arg=PROMTAIL_VERSION=${{ steps.read-version.outputs.version }} `
+      #       --tag=${{ env.DOCKER_HUB_USERNAME }}/promtail-win:${{ steps.read-version.outputs.version }} `
+      #       -f Container/Containerfile .
+
+      # - name: Log in to Docker Hub
+      #   uses: docker/login-action@v1
+      #   with:
+      #     username: ${{ env.DOCKER_HUB_USERNAME }}
+      #     password: ${{ secrets.DOCKER_HUB_PASSWORD }}
 
       # - name: Push Docker image to Docker Hub
       #   uses: docker/build-push-action@v2
