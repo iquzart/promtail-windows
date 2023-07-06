@@ -31,8 +31,8 @@ jobs:
       - name: Build Docker image
         run: |
           docker build `
-            --build-arg=PROMTAIL_VERSION={{ $env:VERSION }} `
-            --tag=${{ env.DOCKER_HUB_USERNAME }}/promtail-win:{{ $env:VERSION }} `
+            --build-arg=PROMTAIL_VERSION=${{ env.VERSION }} `
+            --tag=${{ env.DOCKER_HUB_USERNAME }}/promtail-win:${{ env.VERSION }} `
             -f Container/Containerfile .
 
       - name: Log in to Docker Hub
@@ -41,9 +41,9 @@ jobs:
           username: ${{ env.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
 
-      - name: Push Docker image to Docker Hub
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: Container/Containerfile
-          push: ${{ env.DOCKER_HUB_USERNAME }}/promtail-win:{{ $env:VERSION }}
+      # - name: Push Docker image to Docker Hub
+      #   uses: docker/build-push-action@v2
+      #   with:
+      #     context: .
+      #     file: Container/Containerfile
+      #     push: ${{ env.DOCKER_HUB_USERNAME }}/promtail-win:{{ $env:VERSION }}
