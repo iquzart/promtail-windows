@@ -41,9 +41,7 @@ jobs:
           username: ${{ env.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
 
-      # - name: Push Docker image to Docker Hub
-      #   uses: docker/build-push-action@v2
-      #   with:
-      #     context: .
-      #     file: Container/Containerfile
-      #     push: ${{ env.DOCKER_HUB_USERNAME }}/promtail-win:{{ $env:VERSION }}
+      - name: Push Docker image to Docker Hub
+        run: |
+          docker push ${{ env.DOCKER_HUB_USERNAME }}/promtail-win:${{ env.VERSION }}
+
