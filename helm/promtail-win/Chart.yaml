@@ -1,0 +1,8 @@
+apiVersion: v2
+name: promtail-win
+description: Helm chart to deploy Promtail on Windows nodes
+type: application
+version: 1.0.0
+appVersion: "2.8.2"
+maintainers:
+  - name: Muhammed Iqbal
