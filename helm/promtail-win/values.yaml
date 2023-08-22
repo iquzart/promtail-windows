@@ -1,0 +1,68 @@
+# Default values for promtail-win.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: diquzart/promtail-win
+  pullPolicy: Always
+  tag: ""
+
+imagePullSecrets: []
+
+nameOverride: ""
+fullnameOverride: "promtail-win"
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext:
+   windowsOptions:
+     runAsUserName: "ContainerUser"
+
+securityContext:
+   capabilities:
+     drop:
+     - ALL
+   readOnlyRootFilesystem: true
+
+service:
+  type: ClusterIP
+  port: 3101
+
+resources:
+  limits:
+    cpu: 200m
+    memory: 768Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
+
+nodeSelector:
+   agentpool: win
+   kubernetes.io/os: windows
+
+tolerations:
+  - effect: NoSchedule
+    key: usage-type
+    operator: Equal
+    value: windows
+
+affinity: {}
+
+configs:
+  lokiURL: https://loki.example.com/loki/api/v1/push
+  positionsFileName: C:\promtail\positions.yaml
+  listenPort: 3101
