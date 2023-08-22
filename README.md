@@ -14,9 +14,9 @@ Promtail is a log shipping agent from the Grafana Loki stack. This repository pr
 To deploy Promtail on Windows Kubernetes nodes using the Helm chart, follow these steps:
 
 ## Windows worker node 
-```
+
 The container image is based on nanoserver:ltsc2022. To successfully deploy and run this container, ensure that you are running it on a Windows worker node with the operating system version 2022 (ltsc2022).
-```
+
 1. **Clone the Repository:**
 
    ```sh
