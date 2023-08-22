@@ -70,5 +70,3 @@ This project is licensed under the [MIT License](LICENSE).
 ## Acknowledgments
 
 - Promtail by [Grafana](https://grafana.com)
-
-```
