@@ -72,5 +72,3 @@ This project is licensed under the [MIT License](LICENSE).
 - Promtail by [Grafana](https://grafana.com)
 
 ```
-
-Remember to replace `"your-username"` with your actual GitHub username and adjust any other relevant information. This template provides a starting point for your repository's README file, explaining how to use the Helm chart to deploy Promtail on Windows Kubernetes nodes.
